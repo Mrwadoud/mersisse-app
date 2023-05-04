@@ -76,15 +76,15 @@ main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  // AddonsHelper().setAddonsData();
-  // BusinessSettingHelper().setBusinessSettingData();
-  // app_language.load();
-  // app_mobile_language.load();
-  // app_language_rtl.load();
-  //
-  // access_token.load().whenComplete(() {
-  //   AuthHelper().fetch_and_set();
-  // });
+  AddonsHelper().setAddonsData();
+  BusinessSettingHelper().setBusinessSettingData();
+  app_language.load();
+  app_mobile_language.load();
+  app_language_rtl.load();
+  
+  access_token.load().whenComplete(() {
+    AuthHelper().fetch_and_set();
+  });
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,

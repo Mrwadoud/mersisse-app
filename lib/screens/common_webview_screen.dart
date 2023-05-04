@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 
 class CommonWebviewScreen extends StatefulWidget {
@@ -40,18 +40,18 @@ class _CommonWebviewScreenState extends State<CommonWebviewScreen> {
   buildBody() {
     return SizedBox.expand(
       child: Container(
-        child: WebView(
-          debuggingEnabled: false,
-          javascriptMode: JavascriptMode.unrestricted,
-          onWebViewCreated: (controller) {
-            _webViewController = controller;
-            _webViewController.loadUrl(widget.url);
-          },
-          onWebResourceError: (error) {},
-          onPageFinished: (page) {
-            //print(page.toString());
-          },
-        ),
+        // child: Webview(
+        //   debuggingEnabled: false,
+        //   javascriptMode: JavascriptMode.unrestricted,
+        //   onWebViewCreated: (controller) {
+        //     _webViewController = controller;
+        //     _webViewController.loadUrl(widget.url);
+        //   },
+        //   onWebResourceError: (error) {},
+        //   onPageFinished: (page) {
+        //     //print(page.toString());
+        //   },
+        // ),
       ),
     );
   }

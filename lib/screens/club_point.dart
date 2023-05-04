@@ -89,7 +89,7 @@ class _ClubpointState extends State<Clubpoint> {
       ToastComponent.showDialog(clubpointToWalletResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
     } else {
       /*ToastComponent.showDialog(clubpointToWalletResponse.message, gravity: Toast.center, duration: Toast.lengthLong);*/
-      Scaffold.of(context).showSnackBar(_convertedSnackbar);
+      ScaffoldMessenger.of(context).showSnackBar(_convertedSnackbar);
 
       _converted_ids.add(item_id);
       setState(() {

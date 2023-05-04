@@ -36,20 +36,13 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'package:provider/provider.dart';
 
-
-
-
-
 class Home extends StatefulWidget {
-  Home(
-      {Key key,
-      this.title,
-      this.show_back_button = false,
-      go_back = true,})
-      : super(key: key);
-
-
-
+  Home({
+    Key key,
+    this.title,
+    this.show_back_button = false,
+    go_back = true,
+  }) : super(key: key);
 
   final String title;
   bool show_back_button;
@@ -60,28 +53,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
-
-  HomePresenter homePresenter ;
+  HomePresenter homePresenter;
 
   @override
   void initState() {
-
     Future.delayed(Duration.zero).then((value) {
       change();
     });
     // change();
     // TODO: implement initState
     super.initState();
-
   }
 
-  change(){
-   homePresenter= Provider.of<HomePresenter>(context, listen: false);
-   homePresenter.onRefresh();
+  change() {
+    homePresenter = Provider.of<HomePresenter>(context, listen: false);
+    homePresenter.onRefresh();
     homePresenter.mainScrollListener();
     homePresenter.initPiratedAnimation(this);
   }
-
 
   @override
   void dispose() {
@@ -92,7 +81,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-
     final double statusBarHeight = MediaQuery.of(context).padding.top;
 
     return Consumer<HomePresenter>(builder: (context, homeData, child) {
@@ -181,7 +169,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   18.0,
                                   0.0,
                                 ),
-                                child: buildHomeMenuRow1(context,homeData),
+                                child: buildHomeMenuRow1(context, homeData),
                               ),
                               buildHomeBannerOne(context, homeData),
                               Padding(
@@ -448,6 +436,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               image:
                                   homeData.featuredCategoryList[index].banner,
                               fit: BoxFit.cover,
+                              imageErrorBuilder: (context, error, stackTrace) {
+                                return Image.asset('assets/placeholder.png');
+                              },
                             ))),
                     Flexible(
                       child: Padding(
@@ -646,7 +637,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Widget buildHomeMenuRow2(BuildContext context) {
     return Row(
       children: [
-       /* Flexible(
+        /* Flexible(
           flex: 1,
           fit: FlexFit.tight,
           child: GestureDetector(
@@ -791,9 +782,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         width: double.infinity,
                         height: 140,
                         //decoration: BoxDecorations.buildBoxDecoration_1(),
-                        child: AIZImage.radiusImage(i,6)
-
-                    ),
+                        child: AIZImage.radiusImage(i, 6)),
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Row(
@@ -874,7 +863,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   child: Container(
                     //color: Colors.amber,
                     width: double.infinity,
-                    child: AIZImage.radiusImage(i,6),
+                    child: AIZImage.radiusImage(i, 6),
                   ),
                 );
               },
@@ -936,7 +925,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       left: 9.0, right: 9, top: 20.0, bottom: 10),
                   child: Container(
                       width: double.infinity,
-                      child: AIZImage.radiusImage(i,6)),
+                      child: AIZImage.radiusImage(i, 6)),
                 );
               },
             );

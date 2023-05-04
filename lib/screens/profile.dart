@@ -108,20 +108,20 @@ class _ProfileState extends State<Profile> {
     setState(() {});
   }
 
-  deleteAccountReq()async{
+  deleteAccountReq() async {
     loading();
     var response = await AuthRepository().getAccountDeleteResponse();
 
-    if(response.result){
+    if (response.result) {
       AuthHelper().clearUserData();
       Navigator.pop(loadingcontext);
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (context) {
         return Main();
       }), (route) => false);
     }
     ToastComponent.showDialog(response.message);
   }
-
 
   String counterText(String txt, {default_length = 3}) {
     var blank_zeros = default_length == 3 ? "000" : "00";
@@ -224,7 +224,6 @@ class _ProfileState extends State<Profile> {
             ),
 
             Padding(
-
               padding: const EdgeInsets.symmetric(horizontal: 18.0),
               child: buildHorizontalSettings(),
             ),
@@ -248,7 +247,6 @@ class _ProfileState extends State<Profile> {
 
   PreferredSize buildCustomAppBar(context) {
     return PreferredSize(
-
       preferredSize: Size(DeviceInfo(context).width, 80),
       child: Container(
         // color: Colors.green,
@@ -293,26 +291,26 @@ class _ProfileState extends State<Profile> {
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: Column(
         children: [
-          if(false)
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              buildBottomVerticalCardListItem("assets/coupon.png",
-                  LangText(context).local.profile_screen_coupons,
-                  onPressed: () {}),
-              Divider(
-                thickness: 1,
-                color: MyTheme.light_grey,
-              ),
-              buildBottomVerticalCardListItem("assets/favoriteseller.png",
-                  LangText(context).local.profile_screen_favorite_seller,
-                  onPressed: () {}),
-              Divider(
-                thickness: 1,
-                color: MyTheme.light_grey,
-              ),
-            ],
-          ),
+          if (false)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                buildBottomVerticalCardListItem("assets/coupon.png",
+                    LangText(context).local.profile_screen_coupons,
+                    onPressed: () {}),
+                Divider(
+                  thickness: 1,
+                  color: MyTheme.light_grey,
+                ),
+                buildBottomVerticalCardListItem("assets/favoriteseller.png",
+                    LangText(context).local.profile_screen_favorite_seller,
+                    onPressed: () {}),
+                Divider(
+                  thickness: 1,
+                  color: MyTheme.light_grey,
+                ),
+              ],
+            ),
 
           buildBottomVerticalCardListItem("assets/download.png",
               LangText(context).local.profile_screen_all_digital_products,
@@ -327,91 +325,90 @@ class _ProfileState extends State<Profile> {
           ),
 
           // this is addon
-          if(false)
-          Column(
-            children: [
-              buildBottomVerticalCardListItem("assets/auction.png",
-                  LangText(context).local.profile_screen_on_auction_products,
-                  onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return AuctionProducts();
-                }));
-              }),
-              Divider(
-                thickness: 1,
-                color: MyTheme.light_grey,
-              ),
-            ],
-          ),
+          if (false)
+            Column(
+              children: [
+                buildBottomVerticalCardListItem("assets/auction.png",
+                    LangText(context).local.profile_screen_on_auction_products,
+                    onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return AuctionProducts();
+                  }));
+                }),
+                Divider(
+                  thickness: 1,
+                  color: MyTheme.light_grey,
+                ),
+              ],
+            ),
           if (classified_product_status.$)
-          Column(
-            children: [
-              buildBottomVerticalCardListItem("assets/classified_product.png",
-                  LangText(context).local.profile_screen_on_classified_ads,
-                  onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return ClassifiedAds();
-                }));
-              }),
-              Divider(
-                thickness: 1,
-                color: MyTheme.light_grey,
-              ),
-            ],
-          ),
+            Column(
+              children: [
+                buildBottomVerticalCardListItem("assets/classified_product.png",
+                    LangText(context).local.profile_screen_on_classified_ads,
+                    onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ClassifiedAds();
+                  }));
+                }),
+                Divider(
+                  thickness: 1,
+                  color: MyTheme.light_grey,
+                ),
+              ],
+            ),
 
           // this is addon auction product
-          if(false)
-          Column(
-            children: [
-              buildBottomVerticalCardListItem("assets/auction.png",
-                  LangText(context).local.profile_screen_on_auction_products,
-                  onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return AuctionProducts();
-                }));
-              }),
-              Divider(
-                thickness: 1,
-                color: MyTheme.light_grey,
-              ),
-            ],
-          ),
+          if (false)
+            Column(
+              children: [
+                buildBottomVerticalCardListItem("assets/auction.png",
+                    LangText(context).local.profile_screen_on_auction_products,
+                    onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return AuctionProducts();
+                  }));
+                }),
+                Divider(
+                  thickness: 1,
+                  color: MyTheme.light_grey,
+                ),
+              ],
+            ),
           if (auction_addon_installed.$)
-          Column(
-            children: [
-              buildBottomVerticalCardListItem("assets/auction.png",
-                  LangText(context).local.profile_screen_on_auction_products,
-                  onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return AuctionProducts();
-                }));
-              }),
-              Divider(
-                thickness: 1,
-                color: MyTheme.light_grey,
-              ),
-            ],
-          ),
-
+            Column(
+              children: [
+                buildBottomVerticalCardListItem("assets/auction.png",
+                    LangText(context).local.profile_screen_on_auction_products,
+                    onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return AuctionProducts();
+                  }));
+                }),
+                Divider(
+                  thickness: 1,
+                  color: MyTheme.light_grey,
+                ),
+              ],
+            ),
 
           // this is addon
-          if(false)
-          Column(
-            children: [
-              buildBottomVerticalCardListItem("assets/wholesale.png",
-                  LangText(context).local.profile_screen_wholesale_products,
-                  onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return WholeSaleProducts();
-                }));
-              }),
-              Divider(
-                thickness: 1,
-                color: MyTheme.light_grey,
-              ),
-            ],
-          ),
+          if (false)
+            Column(
+              children: [
+                buildBottomVerticalCardListItem("assets/wholesale.png",
+                    LangText(context).local.profile_screen_wholesale_products,
+                    onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return WholeSaleProducts();
+                  }));
+                }),
+                Divider(
+                  thickness: 1,
+                  color: MyTheme.light_grey,
+                ),
+              ],
+            ),
 
           buildBottomVerticalCardListItem("assets/shop.png",
               LangText(context).local.profile_screen_browse_all_sellers,
@@ -426,61 +423,57 @@ class _ProfileState extends State<Profile> {
             thickness: 1,
             color: MyTheme.light_grey,
           ),
-          if(is_logged_in.$)
-          Column(
-            children: [
-              buildBottomVerticalCardListItem("assets/shop.png",
-                  LangText(context).local.followed_seller_screen_title,
-                  onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return FollowedSellers();
-                }));
-              }),
-              Divider(
-                thickness: 1,
-                color: MyTheme.light_grey,
-              ),
-            ],
-          ),
+          if (is_logged_in.$)
+            Column(
+              children: [
+                buildBottomVerticalCardListItem("assets/shop.png",
+                    LangText(context).local.followed_seller_screen_title,
+                    onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return FollowedSellers();
+                  }));
+                }),
+                Divider(
+                  thickness: 1,
+                  color: MyTheme.light_grey,
+                ),
+              ],
+            ),
 
-          if(is_logged_in.$)
-          Column(
-            children: [
-              buildBottomVerticalCardListItem("assets/delete.png",
-                  LangText(context).local.profile_screen_delete_my_account,
-                  onPressed: () {
+          if (is_logged_in.$)
+            Column(
+              children: [
+                buildBottomVerticalCardListItem("assets/delete.png",
+                    LangText(context).local.profile_screen_delete_my_account,
+                    onPressed: () {
+                  deleteWarningDialog();
 
-                    deleteWarningDialog();
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  //   return Filter(
+                  //     selected_filter: "sellers",
+                  //   );
+                  // }
+                  //)
+                  //);
+                }),
+                Divider(
+                  thickness: 1,
+                  color: MyTheme.light_grey,
+                ),
+              ],
+            ),
 
-                // Navigator.push(context, MaterialPageRoute(builder: (context) {
-                //   return Filter(
-                //     selected_filter: "sellers",
-                //   );
-                // }
-                //)
-                    //);
-              }),
-
-              Divider(
-                thickness: 1,
-                color: MyTheme.light_grey,
-              ),
-            ],
-          ),
-
-
-
-          if(false)
-          buildBottomVerticalCardListItem(
-              "assets/blog.png", LangText(context).local.profile_screen_blogs,
-              onPressed: () {}),
+          if (false)
+            buildBottomVerticalCardListItem(
+                "assets/blog.png", LangText(context).local.profile_screen_blogs,
+                onPressed: () {}),
         ],
       ),
     );
   }
 
   Container buildBottomVerticalCardListItem(String img, String label,
-      {Function() onPressed,bool isDisable = false}) {
+      {Function() onPressed, bool isDisable = false}) {
     return Container(
       height: 40,
       child: TextButton(
@@ -498,12 +491,14 @@ class _ProfileState extends State<Profile> {
                 img,
                 height: 16,
                 width: 16,
-                color: isDisable?MyTheme.grey_153:MyTheme.dark_font_grey,
+                color: isDisable ? MyTheme.grey_153 : MyTheme.dark_font_grey,
               ),
             ),
             Text(
               label,
-              style: TextStyle(fontSize: 12, color: isDisable?MyTheme.grey_153:MyTheme.dark_font_grey),
+              style: TextStyle(
+                  fontSize: 12,
+                  color: isDisable ? MyTheme.grey_153 : MyTheme.dark_font_grey),
             ),
           ],
         ),
@@ -629,20 +624,35 @@ class _ProfileState extends State<Profile> {
   }
 
   deleteWarningDialog() {
-    return showDialog(context: context, builder: (context)=>AlertDialog(
-      title:Text(LangText(context).local.profile_screen_delete_account_warning_title,style:TextStyle(fontSize: 15,color: MyTheme.dark_font_grey),),
-    content: Text(LangText(context).local.profile_screen_delete_account_warning_des,style:TextStyle(fontSize: 13,color: MyTheme.dark_font_grey),),
-      actions: [
-        TextButton(onPressed: (){
-          pop(context);
-        }, child: Text(LangText(context).local.common_no)),
-        TextButton(onPressed: (){
-
-          pop(context);
-          deleteAccountReq();
-        }, child: Text(LangText(context).local.common_yes))
-      ],
-    ));
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text(
+                LangText(context)
+                    .local
+                    .profile_screen_delete_account_warning_title,
+                style: TextStyle(fontSize: 15, color: MyTheme.dark_font_grey),
+              ),
+              content: Text(
+                LangText(context)
+                    .local
+                    .profile_screen_delete_account_warning_des,
+                style: TextStyle(fontSize: 13, color: MyTheme.dark_font_grey),
+              ),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      pop(context);
+                    },
+                    child: Text(LangText(context).local.common_no)),
+                TextButton(
+                    onPressed: () {
+                      pop(context);
+                      deleteAccountReq();
+                    },
+                    child: Text(LangText(context).local.common_yes))
+              ],
+            ));
   }
 /*
   Widget buildSettingAndAddonsHorizontalMenu() {
@@ -761,7 +771,7 @@ class _ProfileState extends State<Profile> {
 
   Widget buildSettingAndAddonsHorizontalMenu() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 20,horizontal: 16),
+      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
       margin: EdgeInsets.only(top: 14),
       width: DeviceInfo(context).width,
       decoration: BoxDecorations.buildBoxDecoration_1(),
@@ -781,7 +791,8 @@ class _ProfileState extends State<Profile> {
             Container(
               // color: Colors.red,
 
-              child: buildSettingAndAddonsHorizontalMenuItem("assets/wallet.png",
+              child: buildSettingAndAddonsHorizontalMenuItem(
+                  "assets/wallet.png",
                   AppLocalizations.of(context).wallet_screen_my_wallet, () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return Wallet();
@@ -873,17 +884,17 @@ class _ProfileState extends State<Profile> {
                       }
                     : () => null),
 
-            buildSettingAndAddonsHorizontalMenuItem(
-                "assets/download.png",
-                AppLocalizations.of(context).profile_screen_download,
-                is_logged_in.$
-                    ? () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return PurchasedDigitalProducts();
-                        }));
-                      }
-                    : () => null),
+          buildSettingAndAddonsHorizontalMenuItem(
+              "assets/download.png",
+              AppLocalizations.of(context).profile_screen_download,
+              is_logged_in.$
+                  ? () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return PurchasedDigitalProducts();
+                      }));
+                    }
+                  : () => null),
         ],
       ),
     );
@@ -930,6 +941,7 @@ class _ProfileState extends State<Profile> {
       ),
     );
   }
+
 /*
   Widget buildSettingAndAddonsVerticalMenu() {
     return Container(
@@ -1242,11 +1254,13 @@ class _ProfileState extends State<Profile> {
           SizedBox(
             height: 5,
           ),
-          Text(
-            title,
-            maxLines: 2,
-            style: TextStyle(
-              color: MyTheme.dark_font_grey,
+          FittedBox(
+            child: Text(
+              title,
+              maxLines: 2,
+              style: TextStyle(
+                color: MyTheme.dark_font_grey,
+              ),
             ),
           ),
         ],
@@ -1415,14 +1429,14 @@ class _ProfileState extends State<Profile> {
           loadingcontext = context;
           return AlertDialog(
               content: Row(
-                children: [
-                  CircularProgressIndicator(),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text("${AppLocalizations.of(context).loading_text}"),
-                ],
-              ));
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(
+                width: 10,
+              ),
+              Text("${AppLocalizations.of(context).loading_text}"),
+            ],
+          ));
         });
   }
 }

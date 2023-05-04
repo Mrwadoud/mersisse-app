@@ -92,7 +92,6 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
   }
 
   onLanguageItemTap(index) {
-
     if (index != _selected_index) {
       setState(() {
         _selected_index = index;
@@ -111,13 +110,14 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
       // local_provider.setLocale(_list[_selected_index].code);
       Provider.of<LocaleProvider>(context, listen: false)
           .setLocale(_list[_selected_index].mobile_app_code);
-      Provider.of<HomePresenter>(context,listen: false).dispose();
+      Provider.of<HomePresenter>(context, listen: false).dispose();
 
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (context) {
         return Main(
           go_back: false,
         );
-      }),(route)=>false);
+      }), (route) => false);
     }
   }
 
@@ -169,7 +169,10 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
       ),
       title: Text(
         "${AppLocalizations.of(context).change_language_change_language} (${app_language.$}) - (${app_mobile_language.$})",
-        style: TextStyle(fontSize: 16, color: MyTheme.dark_font_grey,fontWeight: FontWeight.bold),
+        style: TextStyle(
+            fontSize: 16,
+            color: MyTheme.dark_font_grey,
+            fontWeight: FontWeight.bold),
       ),
       elevation: 0.0,
       titleSpacing: 0,
@@ -241,6 +244,9 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
                             placeholder: 'assets/placeholder.png',
                             image: _list[index].image,
                             fit: BoxFit.fitWidth,
+                            imageErrorBuilder: (context, error, stackTrace) {
+                              return Image.asset('assets/placeholder.png');
+                            },
                           ))),
                   Container(
                     width: 150,

@@ -335,7 +335,8 @@ class _OrderDetailsState extends State<OrderDetails> {
     Navigator.of(context, rootNavigator: true).pop();
     _refundReasonController.clear();
 
-    Scaffold.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
       content: Text(
         refundRequestSendResponse.message,
         style: TextStyle(color: MyTheme.font_grey),
@@ -355,7 +356,8 @@ class _OrderDetailsState extends State<OrderDetails> {
         textColor: MyTheme.accent_color,
         disabledTextColor: Colors.grey,
       ),
-    ));
+    ),
+    );
 
     reset();
     fetchAll();

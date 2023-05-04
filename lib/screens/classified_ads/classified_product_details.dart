@@ -185,7 +185,9 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                           ),
                           onPressed: () {
                             onCopyTap(setState);
-                            SocialShare.copyToClipboard(_productDetails.link);
+                            SocialShare.copyToClipboard(
+                              // _productDetails.link
+                              );
                           },
                         ),
                       ),

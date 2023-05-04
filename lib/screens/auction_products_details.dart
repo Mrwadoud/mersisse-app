@@ -290,7 +290,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
 
       if (mode == "add_to_cart") {
         if (snackbar != null && context != null) {
-          Scaffold.of(context).showSnackBar(snackbar);
+          ScaffoldMessenger.of(context).showSnackBar(snackbar);
         }
         reset();
         fetchAll();
@@ -356,7 +356,8 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                           onPressed: () {
                             onCopyTap(setState);
                             SocialShare.copyToClipboard(
-                                _auctionproductDetails.link);
+                                // _auctionproductDetails.link
+                                );
                           },
                         ),
                       ),
@@ -1190,6 +1191,9 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                           placeholder: 'assets/placeholder.png',
                           image: _auctionproductDetails.shopLogo,
                           fit: BoxFit.cover,
+                          imageErrorBuilder: (context, error, stackTrace) {
+                            return Image.asset('assets/placeholder.png');
+                          },
                         ),
                       ),
                     ),
@@ -2079,6 +2083,10 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                 placeholder: 'assets/placeholder.png',
                                 image: _productImageList[index],
                                 fit: BoxFit.contain,
+                                imageErrorBuilder:
+                                    (context, error, stackTrace) {
+                                  return Image.asset('assets/placeholder.png');
+                                },
                               )),
                         ),
                       );
@@ -2098,6 +2106,9 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                 placeholder: 'assets/placeholder_rectangle.png',
                 image: _productImageList[_currentImage],
                 fit: BoxFit.scaleDown,
+                imageErrorBuilder: (context, error, stackTrace) {
+                  return Image.asset('assets/placeholder.png');
+                },
               )),
             ),
           ),
@@ -2148,6 +2159,9 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                             placeholder: 'assets/placeholder_rectangle.png',
                             image: i,
                             fit: BoxFit.fitHeight,
+                            imageErrorBuilder: (context, error, stackTrace) {
+                              return Image.asset('assets/placeholder.png');
+                            },
                           )),
                     ),
                     Align(

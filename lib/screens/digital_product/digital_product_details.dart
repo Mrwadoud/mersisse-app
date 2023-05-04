@@ -9,7 +9,7 @@ import 'package:active_ecommerce_flutter/screens/product_reviews.dart';
 import 'package:active_ecommerce_flutter/screens/seller_details.dart';
 import 'package:active_ecommerce_flutter/ui_elements/list_product_card.dart';
 import 'package:active_ecommerce_flutter/ui_elements/mini_product_card.dart';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badge;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
@@ -400,7 +400,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails> with Tick
       Provider.of<CartCounter>(context, listen: false).getCount();
       if (mode == "add_to_cart") {
         if (snackbar != null && context != null) {
-          Scaffold.of(context).showSnackBar(snackbar);
+          ScaffoldMessenger.of(context).showSnackBar(snackbar);
         }
         reset();
         fetchAll();
@@ -465,7 +465,9 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails> with Tick
                           ),
                           onPressed: () {
                             onCopyTap(setState);
-                            SocialShare.copyToClipboard(_productDetails.link);
+                            SocialShare.copyToClipboard(
+                              // _productDetails.link
+                              );
                           },
                         ),
                       ),
@@ -844,19 +846,19 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails> with Tick
                           BoxDecorations.buildCircularButtonDecoration_1(),
                           width: 36,
                           height: 36,
-                          child: Badge(
-                            toAnimate: true,
+                          child: badge.Badge(
+                            // toAnimate: true,
                             stackFit: StackFit.loose,
-                            shape: BadgeShape.circle,
-                            badgeColor: MyTheme.accent_color,
+                            // shape: BadgeShape.circle,
+                            // badgeColor: MyTheme.accent_color,
 
-                            borderRadius: BorderRadius.circular(10),
+                            // borderRadius: BorderRadius.circular(10),
                             child: Image.asset(
                               "assets/cart.png",
                               color: MyTheme.dark_font_grey,
                               height: 16,
                             ),
-                            padding: EdgeInsets.all(8),
+                            // padding: EdgeInsets.all(8),
                             badgeContent: Consumer<CartCounter>(
                               builder: (context, cart, child) {
                                 return Text("${cart.cartCounter}",style: TextStyle(fontSize: 12,color: Colors.white),);

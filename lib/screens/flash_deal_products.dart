@@ -213,13 +213,13 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                     itemBuilder: (context, index) {
                       // 3
                       return ProductCard(
-                          id: _searchList[index].id,
-                          image: _searchList[index].thumbnail_image,
-                          name: _searchList[index].name,
-                          main_price: _searchList[index].main_price,
-                          stroked_price: _searchList[index].stroked_price,
-                          has_discount: _searchList[index].has_discount,
-                          discount: _searchList[index].discount,
+                        id: _searchList[index].id,
+                        image: _searchList[index].thumbnail_image,
+                        name: _searchList[index].name,
+                        main_price: _searchList[index].main_price,
+                        stroked_price: _searchList[index].stroked_price,
+                        has_discount: _searchList[index].has_discount,
+                        discount: _searchList[index].discount,
                       );
                     },
                   ),
@@ -232,11 +232,10 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                 children: [
                   headerShimmer(),
                   ShimmerHelper()
-                  .buildProductGridShimmer(scontroller: _scrollController),
+                      .buildProductGridShimmer(scontroller: _scrollController),
                 ],
               ),
             );
-
           }
         });
   }
@@ -318,6 +317,9 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
         fit: BoxFit.cover,
         width: DeviceInfo(context).width,
         height: 180,
+        imageErrorBuilder: (context, error, stackTrace) {
+          return Image.asset('assets/placeholder.png');
+        },
       ),
     );
   }

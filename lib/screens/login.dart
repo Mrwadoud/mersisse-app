@@ -167,7 +167,6 @@ class _LoginState extends State<Login> {
         FacebookAuth.instance.logOut();
       }
       // final userData = await FacebookAuth.instance.getUserData(fields: "email,birthday,friends,gender,link");
-
     } else {
       print("....Facebook auth Failed.........");
       print(facebookLogin.status);
@@ -217,7 +216,7 @@ class _LoginState extends State<Login> {
       final twitterLogin = new TwitterLogin(
           apiKey: SocialConfig().twitter_consumer_key,
           apiSecretKey: SocialConfig().twitter_consumer_secret,
-          redirectURI: 'activeecommerceflutterapp://');
+          redirectURI: 'Mersisse://');
       // Trigger the sign-in flow
 
       final authResult = await twitterLogin.login();
@@ -324,10 +323,11 @@ class _LoginState extends State<Login> {
     final _screen_height = MediaQuery.of(context).size.height;
     final _screen_width = MediaQuery.of(context).size.width;
     return AuthScreen.buildScreen(
-        context,
-        "${AppLocalizations.of(context).login_screen_login_to} " +
-            AppConfig.app_name,
-        buildBody(context, _screen_width));
+      context,
+      "${AppLocalizations.of(context).login_screen_login_to} " +
+          AppConfig.app_name,
+      buildBody(context, _screen_width),
+    );
   }
 
   Widget buildBody(BuildContext context, double _screen_width) {
@@ -549,15 +549,15 @@ class _LoginState extends State<Login> {
                   },
                 ),
               ),
-              if(Platform.isIOS)
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: SignInWithAppleButton(
-                  onPressed: () async {
-                    signInWithApple();
+              if (Platform.isIOS)
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: SignInWithAppleButton(
+                    onPressed: () async {
+                      signInWithApple();
                     },
+                  ),
                 ),
-              ),
               Visibility(
                 visible: allow_google_login.$ || allow_facebook_login.$,
                 child: Padding(
@@ -616,7 +616,7 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                           ),
-                       /* if (Platform.isIOS)
+                        /* if (Platform.isIOS)
                           Padding(
                             padding: const EdgeInsets.only(left: 15.0),
                             // visible: true,

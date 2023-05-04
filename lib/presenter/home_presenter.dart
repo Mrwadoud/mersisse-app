@@ -94,7 +94,7 @@ class HomePresenter extends ChangeNotifier {
   }
 
   fetchBannerTwoImages() async {
-    var bannerTwoResponse = await SlidersRepository().getBannerTwoImages();
+    var bannerTwoResponse = await SlidersRepository().getBannerThreeImages();
     bannerTwoResponse.sliders.forEach((slider) {
       bannerTwoImageList.add(slider.photo);
     });
@@ -213,7 +213,6 @@ class HomePresenter extends ChangeNotifier {
     current_slider = index;
     notifyListeners();
   }
-
 
   void dispose() {
     pirated_logo_controller.dispose();

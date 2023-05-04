@@ -11,13 +11,13 @@ import 'package:active_ecommerce_flutter/screens/category_list.dart';
 import 'package:active_ecommerce_flutter/screens/home.dart';
 import 'package:active_ecommerce_flutter/screens/login.dart';
 import 'package:active_ecommerce_flutter/screens/profile.dart';
+import 'package:badges/badges.dart' as badge;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter/services.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:badges/badges.dart';
 import 'package:provider/provider.dart';
 import 'package:route_transitions/route_transitions.dart';
 
@@ -40,20 +40,21 @@ class _MainState extends State<Main> {
 
   var _children = [];
 
-  fetchAll(){
+  fetchAll() {
     getCartCount();
   }
 
   void onTapped(int i) {
     fetchAll();
-    if (!is_logged_in.$ && ( i == 2)) {
-      
+    if (!is_logged_in.$ && (i == 2)) {
       Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
       return;
     }
 
-    if(i== 3){
-      app_language_rtl.$ ?slideLeftWidget(newPage: Profile(), context: context):slideRightWidget(newPage: Profile(), context: context);
+    if (i == 3) {
+      app_language_rtl.$
+          ? slideLeftWidget(newPage: Profile(), context: context)
+          : slideRightWidget(newPage: Profile(), context: context);
       return;
     }
 
@@ -63,9 +64,8 @@ class _MainState extends State<Main> {
     //print("i$i");
   }
 
-  getCartCount()async {
+  getCartCount() async {
     Provider.of<CartCounter>(context, listen: false).getCount();
-
   }
 
   void initState() {
@@ -73,9 +73,12 @@ class _MainState extends State<Main> {
       Home(),
       CategoryList(
         is_base_category: true,
-
       ),
-      Cart(has_bottomnav: true,from_navigation:true,counter: counter,),
+      Cart(
+        has_bottomnav: true,
+        from_navigation: true,
+        counter: counter,
+      ),
       Profile()
     ];
     fetchAll();
@@ -87,7 +90,7 @@ class _MainState extends State<Main> {
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
         //print("_currentIndex");
@@ -108,19 +111,23 @@ class _MainState extends State<Main> {
         child: Scaffold(
           extendBody: true,
           body: _children[_currentIndex],
-          bottomNavigationBar:
-          SizedBox(
+          bottomNavigationBar: SizedBox(
             height: 70,
             child: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
               onTap: onTapped,
-              currentIndex:_currentIndex,
+              currentIndex: _currentIndex,
               backgroundColor: Colors.white.withOpacity(0.95),
               unselectedItemColor: Color.fromRGBO(168, 175, 179, 1),
               selectedItemColor: MyTheme.accent_color,
-              selectedLabelStyle: TextStyle(fontWeight:FontWeight.w700,color: MyTheme.accent_color,fontSize: 12 ),
-              unselectedLabelStyle: TextStyle(fontWeight:FontWeight.w400,color:Color.fromRGBO(168, 175, 179, 1),fontSize: 12 ),
-
+              selectedLabelStyle: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  color: MyTheme.accent_color,
+                  fontSize: 12),
+              unselectedLabelStyle: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  color: Color.fromRGBO(168, 175, 179, 1),
+                  fontSize: 12),
               items: [
                 BottomNavigationBarItem(
                     icon: Padding(
@@ -133,7 +140,7 @@ class _MainState extends State<Main> {
                         height: 16,
                       ),
                     ),
-                    label:  AppLocalizations.of(context)
+                    label: AppLocalizations.of(context)
                         .main_screen_bottom_navigation_home),
                 BottomNavigationBarItem(
                     icon: Padding(
@@ -151,13 +158,12 @@ class _MainState extends State<Main> {
                 BottomNavigationBarItem(
                     icon: Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
-                      child:
-                      Badge(
-
-                        toAnimate: false,
-                        shape: BadgeShape.circle,
-                        badgeColor: MyTheme.accent_color,
-                        borderRadius: BorderRadius.circular(10),
+                      child: badge.Badge(
+                        
+                        // toAnimate: false,
+                        // shape: BadgeShape.circle,
+                        // badgeColor: MyTheme.accent_color,
+                        // borderRadius: BorderRadius.circular(10),
                         child: Image.asset(
                           "assets/cart.png",
                           color: _currentIndex == 2
@@ -165,10 +171,14 @@ class _MainState extends State<Main> {
                               : Color.fromRGBO(153, 153, 153, 1),
                           height: 16,
                         ),
-                        padding: EdgeInsets.all(5),
+                        // padding: EdgeInsets.all(5),
                         badgeContent: Consumer<CartCounter>(
                           builder: (context, cart, child) {
-                            return Text("${cart.cartCounter}",style: TextStyle(fontSize: 10,color: Colors.white),);
+                            return Text(
+                              "${cart.cartCounter}",
+                              style:
+                                  TextStyle(fontSize: 10, color: Colors.white),
+                            );
                           },
                         ),
                       ),
@@ -196,6 +206,4 @@ class _MainState extends State<Main> {
       ),
     );
   }
-
-
 }

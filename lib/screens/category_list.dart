@@ -38,22 +38,16 @@ class CategoryList extends StatefulWidget {
 }
 
 class _CategoryListState extends State<CategoryList> {
-
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
-
-
 
   @override
   void initState() {
-
     // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Directionality(
       textDirection: app_language_rtl.$ ? TextDirection.rtl : TextDirection.ltr,
       child: Stack(children: [
@@ -67,13 +61,14 @@ class _CategoryListState extends State<CategoryList> {
           ),
         ),
         Scaffold(
-          backgroundColor:Colors.transparent,
-          appBar: PreferredSize(
-              child: buildAppBar(context),
-              preferredSize:Size(DeviceInfo(context).width,50,)),
-            body: buildBody()
-        ),
-
+            backgroundColor: Colors.transparent,
+            appBar: PreferredSize(
+                child: buildAppBar(context),
+                preferredSize: Size(
+                  DeviceInfo(context).width,
+                  50,
+                )),
+            body: buildBody()),
         Align(
           alignment: Alignment.bottomCenter,
           child: widget.is_base_category || widget.is_top_category
@@ -92,7 +87,6 @@ class _CategoryListState extends State<CategoryList> {
       slivers: [
         SliverList(
             delegate: SliverChildListDelegate([
-
           buildCategoryList(),
           Container(
             height: widget.is_base_category ? 60 : 90,
@@ -108,12 +102,13 @@ class _CategoryListState extends State<CategoryList> {
       //centerTitle: true,
       leading: widget.is_base_category
           ? Builder(
-            builder: (context) => Padding(
-              padding: const EdgeInsets.symmetric(
-                  vertical: 0.0, horizontal: 0.0),
-              child: UsefulElements.backToMain(context, go_back: false,color: "white"),
-            ),
-          )
+              builder: (context) => Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
+                child: UsefulElements.backToMain(context,
+                    go_back: false, color: "white"),
+              ),
+            )
           : Builder(
               builder: (context) => IconButton(
                 icon: Icon(CupertinoIcons.arrow_left, color: MyTheme.white),
@@ -141,17 +136,15 @@ class _CategoryListState extends State<CategoryList> {
   }
 
   buildCategoryList() {
-   var data = widget.is_top_category
+    var data = widget.is_top_category
         ? CategoryRepository().getTopCategories()
         : CategoryRepository()
-        .getCategories(parent_id: widget.parent_category_id);
+            .getCategories(parent_id: widget.parent_category_id);
     return FutureBuilder(
-        future: data  ,
+        future: data,
         builder: (context, snapshot) {
-          if(snapshot.connectionState==ConnectionState.waiting){
-            return SingleChildScrollView(
-                child:buildShimmer()
-            );
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return SingleChildScrollView(child: buildShimmer());
           }
           if (snapshot.hasError) {
             //snapshot.hasError
@@ -161,35 +154,30 @@ class _CategoryListState extends State<CategoryList> {
               height: 10,
             );
           } else if (snapshot.hasData) {
-
-
-
-
             //snapshot.hasData
             var categoryResponse = snapshot.data;
             return GridView.builder(
-              gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 mainAxisSpacing: 14,
                 crossAxisSpacing: 14,
                 childAspectRatio: 0.7,
                 crossAxisCount: 3,
               ),
-
               itemCount: categoryResponse.categories.length,
-              padding: EdgeInsets.only(left: 18,right: 18,bottom: widget.is_base_category?30:0),
+              padding: EdgeInsets.only(
+                  left: 18,
+                  right: 18,
+                  bottom: widget.is_base_category ? 30 : 0),
               scrollDirection: Axis.vertical,
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) {
-
                 return buildCategoryItemCard(categoryResponse, index);
-
               },
             );
           } else {
-            return SingleChildScrollView(
-              child:buildShimmer()
-              /*
+            return SingleChildScrollView(child: buildShimmer()
+                /*
               ListView.builder(
                 itemCount: 10,
                 scrollDirection: Axis.vertical,
@@ -246,29 +234,26 @@ class _CategoryListState extends State<CategoryList> {
                   );
                 },
               ),*/
-            );
+                );
           }
         });
   }
 
   Widget buildCategoryItemCard(categoryResponse, index) {
-
-    var itemWidth= ((DeviceInfo(context).width-36)/3);
+    var itemWidth = ((DeviceInfo(context).width - 36) / 3);
     print(itemWidth);
 
     return Container(
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: InkWell(
-        onTap: (){
+        onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {
                 return CategoryProducts(
-                  category_id:
-                  categoryResponse.categories[index].id,
-                  category_name:
-                  categoryResponse.categories[index].name,
+                  category_id: categoryResponse.categories[index].id,
+                  category_name: categoryResponse.categories[index].name,
                 );
               },
             ),
@@ -282,16 +267,20 @@ class _CategoryListState extends State<CategoryList> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
-                constraints: BoxConstraints(maxHeight: itemWidth-28),
+                constraints: BoxConstraints(maxHeight: itemWidth - 28),
                 child: ClipRRect(
                   borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(6), topLeft: Radius.circular(6)),
+                      topRight: Radius.circular(6),
+                      topLeft: Radius.circular(6)),
                   child: FadeInImage.assetNetwork(
                     placeholder: 'assets/placeholder.png',
                     image: categoryResponse.categories[index].banner,
                     fit: BoxFit.cover,
                     height: itemWidth,
                     width: DeviceInfo(context).width,
+                    imageErrorBuilder: (context, error, stackTrace) {
+                      return Image.asset('assets/placeholder.png');
+                    },
                   ),
                 ),
               ),
@@ -311,7 +300,6 @@ class _CategoryListState extends State<CategoryList> {
                       fontSize: 10,
                       height: 1.6,
                       fontWeight: FontWeight.w600),
-
                 ),
               ),
               Spacer()
@@ -466,18 +454,17 @@ class _CategoryListState extends State<CategoryList> {
     );
   }
 
-
-Widget  buildShimmer(){
-    return  GridView.builder(
+  Widget buildShimmer() {
+    return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         mainAxisSpacing: 14,
         crossAxisSpacing: 14,
         childAspectRatio: 1,
         crossAxisCount: 3,
       ),
-
       itemCount: 18,
-      padding: EdgeInsets.only(left: 18,right: 18,bottom: widget.is_base_category?30:0),
+      padding: EdgeInsets.only(
+          left: 18, right: 18, bottom: widget.is_base_category ? 30 : 0),
       scrollDirection: Axis.vertical,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -488,8 +475,5 @@ Widget  buildShimmer(){
         );
       },
     );
-
-
-
   }
 }
