@@ -54,30 +54,44 @@ android {
         multiDexEnabled true
     }
 
-    signingConfigs {
-        release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null // original code
-            //storeFile file("key.jks") ? file("key.jks") : null //new solution for some customers
-            storePassword keystoreProperties['storePassword']
-        }
+//    signingConfigs {
+//        release {
+//            keyAlias keystoreProperties['keyAlias']
+//            keyPassword keystoreProperties['keyPassword']
+//            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null // original code
+//            //storeFile file("key.jks") ? file("key.jks") : null //new solution for some customers
+//            storePassword keystoreProperties['storePassword']
+//        }
+//    }
+
+
+ //  signingConfigs {
+  //     release {
+  //         keyAlias keystoreProperties['key']
+   //        keyPassword keystoreProperties['v$2F2@F&RGusPF9Cs']
+    //       storeFile keystoreProperties['upload-keystore.jks'] ? file(keystoreProperties['upload-keystore.jks']) : null
+   //        storePassword keystoreProperties['v$2F2@F&RGusPF9Cs']
+   //    }
+ //  }
+ //  buildTypes {
+   //    release {
+     //      signingConfig signingConfigs.release
+  //     }
+//   }
+
+signingConfigs {
+    release {
+        keyAlias keystoreProperties['key']
+        keyPassword keystoreProperties['v$2F2@F&RGusPF9Cs']
+        storeFile file("upload-keystore.jks")
+        storePassword keystoreProperties['v$2F2@F&RGusPF9Cs']
     }
-
-
-   signingConfigs {
-       release {
-           keyAlias keystoreProperties['keyAlias']
-           keyPassword keystoreProperties['keyPassword']
-           storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-           storePassword keystoreProperties['storePassword']
-       }
-   }
-   buildTypes {
-       release {
-           signingConfig signingConfigs.release
-       }
-   }
+}
+buildTypes {
+    release {
+        signingConfig signingConfigs.release
+    }
+}
 
 }
 
@@ -89,7 +103,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.firebase:firebase-messaging:20.1.0'
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.google.android.material:material:1.10.0-alpha02'
+    // implementation 'com.google.android.material:material:1.10.0-alpha02'
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:28.0.1')
         implementation 'com.google.firebase:firebase-core'
